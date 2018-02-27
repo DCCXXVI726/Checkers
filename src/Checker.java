@@ -10,6 +10,7 @@ public class Checker {
         }else {
             if (field [place_of_chop[0]*2-position[0]][place_of_chop[1]*2-position[1]]==0){
                 field[place_of_chop[0]][place_of_chop[1]]=0;
+                field[position[0]][position[1]]=0;
                 field [place_of_chop[0]*2-position[0]][place_of_chop[1]*2-position[1]]=color;
             }
         }
