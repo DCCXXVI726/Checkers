@@ -78,7 +78,7 @@ public class Test_Queen {
 
     boolean[] result = new boolean[5]; //expected results
 
-    public boolean Test(Checker checker, byte number_of_case) {
-        return checker.chop(test_field[number_of_case], place_of_chop[number_of_case], place_of_final_position[number_of_case]) == result;
-    }
+    //public boolean Test(Checker checker, byte number_of_case) {
+    //    return checker.chop(test_field[number_of_case], place_of_chop[number_of_case], place_of_final_position[number_of_case]) == result;
+    //}
 }
