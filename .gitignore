@@ -5,3 +5,6 @@
 .idea/workspace.xml
 .idea/misc.xml
 .Checkers.iml
+*.class
+.idea/
+.out/
