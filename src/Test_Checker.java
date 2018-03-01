@@ -131,6 +131,14 @@ public class Test_Checker {
         return true;
     }
 
+    static void printArray(int[][] array){
+        for (int i = 0; i < array.length; i ++){
+            for (int k = 0; k < array[0].length; k++){
+                System.out.println(array[i][k]);
+            }
+        }
+    }
+
     static public boolean Test (Checker checker, int[][] field, byte[] chop,byte[] place_of_checker,int[][] result) {
         return compareFields(checker.chop(field, chop), result);}
 
