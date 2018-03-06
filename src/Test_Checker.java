@@ -1,5 +1,5 @@
 public class Test_Checker {
-    static int[][][] test_field = {
+    static byte[][][] test_field = {
             {
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
@@ -67,7 +67,7 @@ public class Test_Checker {
             {4, 4},
             {3, 3},
     };
-    static int[][][] result_field = {
+    static byte[][][] result_field = {
             {
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
@@ -120,30 +120,30 @@ public class Test_Checker {
             }
     };
 
-    static boolean compareFields(int[][] field1, int[][] field2){
+    static boolean compareFields(byte[][] field1, byte[][] field2){
         if (field1.length != field2.length || field1[0].length != field2[0].length) return false;
 
-        for (int i = 0; i < field1.length; i++){
-            for (int k = 0; k < field1[0].length; k++){
+        for (byte i = 0; i < field1.length; i++){
+            for (byte k = 0; k < field1[0].length; k++){
                 if (field1[i][k] != field2[i][k]) return false;
             }
         }
         return true;
     }
 
-    static void printArray(int[][] array){
-        for (int i = 0; i < array.length; i ++){
-            for (int k = 0; k < array[0].length; k++){
+    static void printArray(byte[][] array){
+        for (byte i = 0; i < array.length; i ++){
+            for (byte k = 0; k < array[0].length; k++){
                 System.out.println(array[i][k]);
             }
         }
     }
 
-    static public boolean Test (Checker checker, int[][] field, byte[] chop,byte[] place_of_checker,int[][] result) {
+    static public boolean Test (Checker checker, byte[][] field, byte[] chop,byte[] place_of_checker,byte[][] result) {
         return compareFields(checker.chop(field, chop), result);}
 
     public static void main(String args[]){
-        for(int i =0;i<5;i++){
+        for(byte i =0;i<5;i++){
             Checker checker = new Checker(place_of_checker[i],test_field[i][place_of_checker[i][0]][place_of_checker[i][1]]);
             System.out.println(Test(checker,test_field[i],place_of_chop[i],place_of_checker[i],result_field[i]));
         }
