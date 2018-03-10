@@ -53,19 +53,19 @@ public class Test_Checker {
     };
 
     static byte [][] place_of_chop = {
-            {2, 4},
-            {0, 3},
-            {2, 3},
-            {3, 3},
-            {4, 4},
+            {5, 1},
+            {5, 2},
+            {4, 1},
+            {2, 2},
+            {4, 3},
     };
 
     static byte[][] place_of_checker = {
             {3, 3},
-            {1, 4},
-            {3, 2},
+            {3, 0},
+            {2, 3},
             {4, 4},
-            {3, 3},
+            {6, 5},
     };
     static byte[][][] result_field = {
             {
@@ -121,6 +121,7 @@ public class Test_Checker {
     };
 
     static boolean compareFields(byte[][] field1, byte[][] field2){
+        printArray(field1);
         if (field1.length != field2.length || field1[0].length != field2[0].length) return false;
 
         for (byte i = 0; i < field1.length; i++){
@@ -134,8 +135,9 @@ public class Test_Checker {
     static void printArray(byte[][] array){
         for (byte i = 0; i < array.length; i ++){
             for (byte k = 0; k < array[0].length; k++){
-                System.out.println(array[i][k]);
+                System.out.print(array[i][k]+",");
             }
+            System.out.println();
         }
     }
 
