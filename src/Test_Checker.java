@@ -119,9 +119,67 @@ public class Test_Checker {
                     {0, 0, 0, 0, 0, 0, 0, 0}
             }
     };
+    static byte[][] place_of_move = {
+            {2, 2},
+            {4, 1},
+            {3, 4},
+            {3, 3},
+            {7, 6},
+    };
+    static byte[][][] result_field1 = {
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 1, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, -1, 0, 0, 0, 0, 0},
+                    {0, -1, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0}
+            },
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {1, 0, 0, 0, 0, 0, 0, 0},
+                    {0, -1, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0}
+            },
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, -1, 0, 1, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0}
+            },
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, -1, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0}
+            },
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, -1, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 1, 0}
+            }
+    };
 
     static boolean compareFields(byte[][] field1, byte[][] field2){
-        printArray(field1);
         if (field1.length != field2.length || field1[0].length != field2[0].length) return false;
 
         for (byte i = 0; i < field1.length; i++){
@@ -141,13 +199,20 @@ public class Test_Checker {
         }
     }
 
-    static public boolean Test (Checker checker, byte[][] field, byte[] chop,byte[] place_of_checker,byte[][] result) {
+    static public boolean Test (Checker checker, byte[][] field, byte[] chop,byte[][] result) {
         return compareFields(checker.chop(field, chop), result);}
+
+    static public boolean Test_move(Checker checker, byte[][] field,byte[] move,byte[][]result){
+        printArray(checker.move(field,move));
+        return compareFields(checker.move(field,move),result);
+    }
 
     public static void main(String args[]){
         for(byte i =0;i<5;i++){
             Checker checker = new Checker(place_of_checker[i],test_field[i][place_of_checker[i][0]][place_of_checker[i][1]]);
-            System.out.println(Test(checker,test_field[i],place_of_chop[i],place_of_checker[i],result_field[i]));
+            System.out.println(Test(checker,test_field[i],place_of_chop[i],result_field[i]));
+            checker = new Checker(place_of_checker[i],test_field[i][place_of_checker[i][0]][place_of_checker[i][1]]);
+            System.out.println(Test_move(checker,test_field[i],place_of_move[i],result_field1[i]));
         }
     }
 }

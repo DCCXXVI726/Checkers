@@ -19,5 +19,16 @@ public class Checker {
         }
         return field;
     }
+    public byte[][] move(byte[][] field,byte[] place_of_move){
+        if (Math.abs(place_of_move[0]-position[0])==1
+                &&Math.abs(place_of_move[1]-position[1])==1
+                &&field[place_of_move[0]][place_of_move[1]]==0){
+            field[place_of_move[0]][place_of_move[1]]=color;
+            field[position[0]][position[1]]=0;
+            position[0]=place_of_move[0];
+            position[1]=place_of_move[1];
+        }
+        return field;
+    }
 
 }
