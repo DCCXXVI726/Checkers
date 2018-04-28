@@ -20,19 +20,20 @@ public class Queen extends Checker {
         return true;
     }
 
-    public void move(byte[][] field, byte[] place_of_move) {
-        if (Math.abs(place_of_move[0] - position[0]) != Math.abs(place_of_move[1] - position[1])) return;
+    public boolean move(byte[][] field, byte[] place_of_move) {
+        if (Math.abs(place_of_move[0] - position[0]) != Math.abs(place_of_move[1] - position[1])) return false;
 
         byte[] enemies = countEnemies(field, place_of_move);
 
-        if (enemies[0] > 0) return;
+        if (enemies[0] > 0) return false;
         else if (field[place_of_move[0]][place_of_move[1]] == 0) {
             field[place_of_move[0]][place_of_move[1]] = color;
             field[position[0]][position[1]] = 0;
             position[0] = place_of_move[0];
             position[1] = place_of_move[1];
+            return true;
         }
-        return;
+        return false;
     }
 
     private byte[] countEnemies(byte[][] field, byte[] finalPosition) {
