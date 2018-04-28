@@ -68,6 +68,7 @@ public class Game {
             if(checker_on_chop.check_possible_chop(field)){
             }else {
                 onChop=false;
+                turn*=-1;
             }
         }else{
             if (a != null) {
@@ -89,3 +90,4 @@ public class Game {
         }
     }
 }
+
