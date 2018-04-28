@@ -34,16 +34,19 @@ public class Game {
 
     };
     Game(){
-        List<Checker> white_checker= new ArrayList<>();
+        List<Checker> white_checker= new ArrayList<Checker>();
         for(int i=0;i<12;i++){
             white_checker.add(new Checker(white_start_position[i],white));
         }
-        List<Checker> black_checker=new ArrayList<>();
+        List<Checker> black_checker=new ArrayList<Checker>();
         for(int i=0;i<12;i++){
             black_checker.add(new Checker(black_start_position[i],black));
         }
-        List<Queen> white_queen = new ArrayList<>();
-        List<Queen> black_queen = new ArrayList<>();
+        List<Queen> white_queen = new ArrayList<Queen>();
+        List<Queen> black_queen = new ArrayList<Queen>();
+
+    }
+    public void Handler(byte[] start_position,byte[] final_position ){
         
     }
 }
