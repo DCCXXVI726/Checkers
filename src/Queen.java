@@ -32,7 +32,7 @@ public class Queen extends Checker {
         return false;
     }
 
-    public boolean check_possible_chops(byte[][] field){
+    public boolean check_possible_chop(byte[][] field){
 
         boolean diag = false;
         for (int h = this.position[0] - 7; h < 8; h++)
