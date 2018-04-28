@@ -44,6 +44,7 @@ public class Game {
     };
     List<byte[]> can_be_chopped = new ArrayList<byte[]>();
     boolean onChop= false;
+    Checker checker_on_chop;
     byte turn = 1;
     private Checker search(byte[] first_position){
         for (Checker i:checkers){
@@ -61,8 +62,13 @@ public class Game {
     }
     public void handler(byte[] first_position,byte[] final_position ){
         Checker a=search(first_position);
-        if (a!=null){
-            if(a.color==turn){
+        if(onChop) {
+            checker_on_chop.chop(field,final_position);
+
+            if (a != null) {
+                if (a.color == turn) {
+
+                }
 
             }
         }

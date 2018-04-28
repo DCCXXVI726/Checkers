@@ -31,6 +31,23 @@ public class Checker {
             return false;
         }
     }
+    
+    public boolean check_possible_of_chop(byte[][] field){
+        boolean possible = false;
+        byte [][] possible_place_of_chop = {
+                {(byte)(position[0]+2),(byte)(position[1]+2)},
+                {(byte)(position[0]+2),(byte)(position[1]-2)},
+                {(byte)(position[0]-2),(byte)(position[1]+2)},
+                {(byte)(position[0]-2),(byte)(position[1]-2)}
+        };
+        for (byte[] i: possible_place_of_chop){
+            if ((i[0]>0&&i[0]<8)&&(i[1]>0&&i[1]<8)&&(check_chop(field,i))){
+                possible = true;
+            };
+        }
+        return possible;
+    }
+
     public boolean move(byte[][] field,byte[] place_of_move){
         if (Math.abs(place_of_move[0]-position[0])==1
                 &&Math.abs(place_of_move[1]-position[1])==1
