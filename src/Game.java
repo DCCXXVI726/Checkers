@@ -54,8 +54,11 @@ public class Game {
         return null;
     }
     Game(){
-        for(int i=0;i<24;i++){
+        for(int i=0;i<12;i++){
             checkers.add(new Checker(start_positions[i],white));
+        }
+        for(int i=12;i<24;i++){
+            checkers.add(new Checker(start_positions[i],black));
         }
 
     }
