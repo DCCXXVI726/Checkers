@@ -42,7 +42,6 @@ public class Game {
             {0, 1, 0, 1, 0, 1, 0, 1},
             {1, 0, 1, 0, 1, 0, 1, 0}
     };
-    List<byte[]> can_be_chopped = new ArrayList<byte[]>();
     boolean onChop= false;
     Checker checker_on_chop;
     byte turn = 1;
@@ -64,13 +63,20 @@ public class Game {
         Checker a=search(first_position);
         if(onChop) {
             checker_on_chop.chop(field,final_position);
+            if(checker_on_chop.check_possible_chop(field)){
+            }else {
+                onChop=false;
+                if (a != null) {
+                    if (a.color == turn) {
+                        if (a.move(field,final_position)){
 
-            if (a != null) {
-                if (a.color == turn) {
-
+                        }
+                    }
                 }
-
             }
+
+
+
         }
     }
 }
