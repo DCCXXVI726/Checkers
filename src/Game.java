@@ -32,7 +32,7 @@ public class Game {
 
     };
     List<Checker> checkers = new ArrayList<Checker>();
-    public byte field[][] = {
+    public byte[][] field = {
             {0, -1, 0, -1, 0, -1, 0, -1},
             {-1, 0, -1, 0, -1, 0, -1, 0},
             {0, -1, 0, -1, 0, -1, 0, -1},
