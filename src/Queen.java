@@ -16,8 +16,20 @@ public class Queen extends Checker {
             field[position[0]][position[1]] = 0;
             position[0] = place_of_chop[0];
             position[1] = place_of_chop[1];
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public boolean check_chop(byte[][] field, byte[] place_of_chop) {
+        if (Math.abs(place_of_chop[0] - position[0]) != Math.abs(place_of_chop[1] - position[1])) return false;
+
+        byte[] enemies = countEnemies(field, place_of_chop);
+
+        if (enemies[0] > 1 || enemies[1] != 1) return false;
+        else if (field[place_of_chop[0]][place_of_chop[1]] == 0) return true;
+
+        return false;
     }
 
     public boolean move(byte[][] field, byte[] place_of_move) {
@@ -49,7 +61,7 @@ public class Queen extends Checker {
             int y = position[1] + b * yStep;
             if (field[x][y] != 0) {
                 numOfCheckers += 1;
-                if (field[x][y] == color * (-1)) {
+                if (field[x][y] * color < (-1)) {
                     numOfVictims++;
                     xVictimPos = (byte) x;
                     yVictimPos = (byte) y;
