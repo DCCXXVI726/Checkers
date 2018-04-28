@@ -9,3 +9,5 @@
 .idea/
 .out/
 src/Tester.java
+src/Test_Checker.java
+src/Test_Queen.java
