@@ -1,13 +1,8 @@
-public class Queen {
-    public byte color;
-    public byte[] position= new byte[2];
-    public byte[] position_of_chop= new byte[2];
-    Queen(byte[] position1,byte color1){
-        color = color1;
-        position[0] = position1[0];
-        position[1] = position1[1];
-    }
+public class Queen extends Checker {
 
+    Queen(byte[] position1, byte color1) {
+        super(position1, color1);
+    }
 
     public boolean chop(byte[][] field, byte[] place_of_chop) {
         if (Math.abs(place_of_chop[0] - position[0]) != Math.abs(place_of_chop[1] - position[1])) return false;
