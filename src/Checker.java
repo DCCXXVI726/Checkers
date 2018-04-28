@@ -21,6 +21,16 @@ public class Checker {
             return false;
         }
     }
+    public boolean check_chop(byte[][] field ,byte[] place_of_chop){
+        if (Math.abs(place_of_chop[0]-position[0])==2
+                &&Math.abs(place_of_chop[1]-position[1])==2
+                &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]==(color*-1)
+                &&field[place_of_chop[0]][place_of_chop[1]]==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public boolean move(byte[][] field,byte[] place_of_move){
         if (Math.abs(place_of_move[0]-position[0])==1
                 &&Math.abs(place_of_move[1]-position[1])==1

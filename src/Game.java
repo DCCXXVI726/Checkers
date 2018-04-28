@@ -32,8 +32,20 @@ public class Game {
 
     };
     List<Checker> checkers = new ArrayList<Checker>();
+    byte field[][] = {
+            {0, -1, 0, -1, 0, -1, 0, -1},
+            {-1, 0, -1, 0, -1, 0, -1, 0},
+            {0, -1, 0, -1, 0, -1, 0, -1},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 0, 1, 0, 1, 0, 1, 0},
+            {0, 1, 0, 1, 0, 1, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0}
+    };
 
-    byte turn;
+    boolean onChop= false;
+    byte turn = 1;
+
     private Checker search(byte[] first_position){
         for (Checker i:checkers){
             if (i.position ==first_position) {
@@ -51,7 +63,9 @@ public class Game {
     public void handler(byte[] first_position,byte[] final_position ){
         Checker a=search(first_position);
         if (a!=null){
+            if(a.color==turn){
 
+            }
         }
     }
 }
