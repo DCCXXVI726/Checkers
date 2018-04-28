@@ -6,7 +6,7 @@ public class Checker {
         position[0] = position1[0];
         position[1] = position1[1];
     }
-    public byte[][] chop(byte[][] field ,byte[] place_of_chop){
+    public boolean chop(byte[][] field ,byte[] place_of_chop){
         if (Math.abs(place_of_chop[0]-position[0])==2
                 &&Math.abs(place_of_chop[1]-position[1])==2
                 &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]==(color*-1)
@@ -16,10 +16,12 @@ public class Checker {
             field[position[0]][position[1]]=0;
             position[0]=place_of_chop[0];
             position[1]=place_of_chop[1];
+            return true;
+        }else{
+            return false;
         }
-        return field;
     }
-    public byte[][] move(byte[][] field,byte[] place_of_move){
+    public void move(byte[][] field,byte[] place_of_move){
         if (Math.abs(place_of_move[0]-position[0])==1
                 &&Math.abs(place_of_move[1]-position[1])==1
                 &&field[place_of_move[0]][place_of_move[1]]==0){
@@ -28,7 +30,6 @@ public class Checker {
             position[0]=place_of_move[0];
             position[1]=place_of_move[1];
         }
-        return field;
     }
 
 }
