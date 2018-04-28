@@ -47,7 +47,7 @@ public class Game {
     byte turn = 1;
     private Checker search(byte[] first_position){
         for (Checker i:checkers){
-            if (i.position ==first_position) {
+            if ((i.position[0] == first_position[0])&&(i.position[1]==first_position[1])) {
                 return i;
             }
         }
@@ -60,7 +60,6 @@ public class Game {
         for(int i=12;i<24;i++){
             checkers.add(new Checker(start_positions[i],black));
         }
-
     }
     public void handler(byte[] first_position,byte[] final_position ){
         Checker a=search(first_position);
