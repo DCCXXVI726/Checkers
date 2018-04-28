@@ -33,6 +33,8 @@ public class Game {
             {7,0},
 
     };
+    byte turn;
+    private Checker
     Game(){
         List<Checker> white_checker= new ArrayList<Checker>();
         for(int i=0;i<12;i++){
@@ -47,6 +49,6 @@ public class Game {
 
     }
     public void Handler(byte[] start_position,byte[] final_position ){
-        
+
     }
 }
