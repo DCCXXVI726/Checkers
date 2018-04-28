@@ -34,7 +34,7 @@ public class Game {
 
     };
     byte turn;
-    private Checker
+
     Game(){
         List<Checker> white_checker= new ArrayList<Checker>();
         for(int i=0;i<12;i++){
@@ -46,7 +46,6 @@ public class Game {
         }
         List<Queen> white_queen = new ArrayList<Queen>();
         List<Queen> black_queen = new ArrayList<Queen>();
-
     }
     public void Handler(byte[] start_position,byte[] final_position ){
 
