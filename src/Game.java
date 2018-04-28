@@ -42,10 +42,9 @@ public class Game {
             {0, 1, 0, 1, 0, 1, 0, 1},
             {1, 0, 1, 0, 1, 0, 1, 0}
     };
-
+    List<byte[]> can_be_chopped = new ArrayList<byte[]>();
     boolean onChop= false;
     byte turn = 1;
-
     private Checker search(byte[] first_position){
         for (Checker i:checkers){
             if (i.position ==first_position) {

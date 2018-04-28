@@ -9,7 +9,7 @@ public class Checker {
     public boolean chop(byte[][] field ,byte[] place_of_chop){
         if (Math.abs(place_of_chop[0]-position[0])==2
                 &&Math.abs(place_of_chop[1]-position[1])==2
-                &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]==(color*-1)
+                &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]*(color)<0
                 &&field[place_of_chop[0]][place_of_chop[1]]==0){
             field[place_of_chop[0]][place_of_chop[1]]=color;
             field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]=0;
@@ -24,7 +24,7 @@ public class Checker {
     public boolean check_chop(byte[][] field ,byte[] place_of_chop){
         if (Math.abs(place_of_chop[0]-position[0])==2
                 &&Math.abs(place_of_chop[1]-position[1])==2
-                &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]==(color*-1)
+                &&field[(place_of_chop[0]-position[0])/2+position[0]][(place_of_chop[1]-position[1])/2+position[1]]*(color)<0
                 &&field[place_of_chop[0]][place_of_chop[1]]==0){
             return true;
         }else{
