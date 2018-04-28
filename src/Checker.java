@@ -32,7 +32,7 @@ public class Checker {
         }
     }
 
-    public boolean check_possible_chop(byte[][] field){
+    public boolean check_possible_chops(byte[][] field){
         boolean possible = false;
         byte [][] possible_place_of_chop = {
                 {(byte)(position[0]+2),(byte)(position[1]+2)},

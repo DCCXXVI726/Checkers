@@ -32,6 +32,32 @@ public class Queen extends Checker {
         return false;
     }
 
+    public boolean check_possible_chops(byte[][] field){
+
+        boolean diag = false;
+        for (int h = this.position[0] - 7; h < 8; h++)
+        {
+            for (int w = this.position[1] - 7; w < 8; w++){
+                if ((w > 0) && (h > 0) && (w != this.position[1])) {
+                    byte position[] = {(byte)h,(byte)w};
+                    diag = check_chop(field, position);
+                    if (diag) return true;
+                }
+            }
+        }
+        for (int h = this.position[0] - 7; h < 8; h++)
+        {
+            for (int w = this.position[1] + 7; w > 0; w--){
+                if ((w < 8) && (h > 0) && (w != this.position[1])) {
+                    byte position[] = {(byte)h,(byte)w};
+                    diag = check_chop(field, position);
+                    if (diag) return true;
+                }
+            }
+        }
+        return diag;
+    }
+
     public boolean move(byte[][] field, byte[] place_of_move) {
         if (Math.abs(place_of_move[0] - position[0]) != Math.abs(place_of_move[1] - position[1])) return false;
 
