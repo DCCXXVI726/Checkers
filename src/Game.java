@@ -32,7 +32,7 @@ public class Game {
 
     };
     List<Checker> checkers = new ArrayList<Checker>();
-    byte field[][] = {
+    public byte field[][] = {
             {0, -1, 0, -1, 0, -1, 0, -1},
             {-1, 0, -1, 0, -1, 0, -1, 0},
             {0, -1, 0, -1, 0, -1, 0, -1},
@@ -66,17 +66,24 @@ public class Game {
             if(checker_on_chop.check_possible_chop(field)){
             }else {
                 onChop=false;
-                if (a != null) {
-                    if (a.color == turn) {
-                        if (a.move(field,final_position)){
-
+            }
+        }else{
+            if (a != null) {
+                if (a.color*turn>0) {
+                    if (!a.move(field,final_position)){
+                        if(a.chop(field,final_position)){
+                            if(a.check_possible_chop(field)){
+                                onChop=true;
+                                checker_on_chop=a;
+                            }else{
+                                turn*=-1;
+                            }
                         }
+                    }else{
+                        turn*=-1;
                     }
                 }
             }
-
-
-
         }
     }
 }
