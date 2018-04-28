@@ -4,12 +4,12 @@ public class Queen extends Checker {
         super(position1, color1);
     }
 
-    public byte[][] chop(byte[][] field, byte[] place_of_chop) {
-        if (Math.abs(place_of_chop[0] - position[0]) != Math.abs(place_of_chop[1] - position[1])) return field;
+    public boolean chop(byte[][] field, byte[] place_of_chop) {
+        if (Math.abs(place_of_chop[0] - position[0]) != Math.abs(place_of_chop[1] - position[1])) return false;
 
         byte[] enemies = countEnemies(field, place_of_chop);
 
-        if (enemies[0] > 1 || enemies[1] != 1) return field;
+        if (enemies[0] > 1 || enemies[1] != 1) return false;
         else if (field[place_of_chop[0]][place_of_chop[1]] == 0) {
             field[enemies[2]][enemies[3]] = 0;
             field[place_of_chop[0]][place_of_chop[1]] = color;
@@ -17,22 +17,22 @@ public class Queen extends Checker {
             position[0] = place_of_chop[0];
             position[1] = place_of_chop[1];
         }
-        return field;
+        return true;
     }
 
-    public byte[][] move(byte[][] field, byte[] place_of_move) {
-        if (Math.abs(place_of_move[0] - position[0]) != Math.abs(place_of_move[1] - position[1])) return field;
+    public void move(byte[][] field, byte[] place_of_move) {
+        if (Math.abs(place_of_move[0] - position[0]) != Math.abs(place_of_move[1] - position[1])) return;
 
         byte[] enemies = countEnemies(field, place_of_move);
 
-        if (enemies[0] > 0) return field;
+        if (enemies[0] > 0) return;
         else if (field[place_of_move[0]][place_of_move[1]] == 0) {
             field[place_of_move[0]][place_of_move[1]] = color;
             field[position[0]][position[1]] = 0;
             position[0] = place_of_move[0];
             position[1] = place_of_move[1];
         }
-        return field;
+        return;
     }
 
     private byte[] countEnemies(byte[][] field, byte[] finalPosition) {
