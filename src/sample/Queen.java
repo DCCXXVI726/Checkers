@@ -1,3 +1,5 @@
+package sample;
+
 public class Queen extends Checker {
 
     Queen(byte[] position1, byte color1) {
@@ -32,24 +34,22 @@ public class Queen extends Checker {
         return false;
     }
 
-    public boolean check_possible_chop(byte[][] field){
+    public boolean check_possible_chop(byte[][] field) {
 
         boolean diag = false;
-        for (int h = this.position[0] - 7; h < 8; h++)
-        {
-            for (int w = this.position[1] - 7; w < 8; w++){
+        for (int h = this.position[0] - 7; h < 8; h++) {
+            for (int w = this.position[1] - 7; w < 8; w++) {
                 if ((w > 0) && (h > 0) && (w != this.position[1])) {
-                    byte position[] = {(byte)h,(byte)w};
+                    byte position[] = {(byte) h, (byte) w};
                     diag = check_chop(field, position);
                     if (diag) return true;
                 }
             }
         }
-        for (int h = this.position[0] - 7; h < 8; h++)
-        {
-            for (int w = this.position[1] + 7; w > 0; w--){
+        for (int h = this.position[0] - 7; h < 8; h++) {
+            for (int w = this.position[1] + 7; w > 0; w--) {
                 if ((w < 8) && (h > 0) && (w != this.position[1])) {
-                    byte position[] = {(byte)h,(byte)w};
+                    byte position[] = {(byte) h, (byte) w};
                     diag = check_chop(field, position);
                     if (diag) return true;
                 }

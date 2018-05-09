@@ -6,7 +6,6 @@
 .idea/misc.xml
 .Checkers.iml
 *.class
-.idea/
 .out/
 src/Tester.java
 src/Test_Checker.java
