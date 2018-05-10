@@ -56,6 +56,33 @@ public class Game {
         }
         return null;
     }
+    private void delete(byte[] position) {
+        for (Checker i : checkers) {
+            if ((i.position[0] == position[0]) && (i.position[1] == position[1])) {
+                checkers.remove(i);
+            }
+        }
+    }
+
+    private Checker change(Checker changed){
+        if (changed.position[0]==3.5-(changed.color)*3.5) {
+            byte icolor = changed.color;
+            byte[] iposition = new byte[2];
+            iposition[0] = changed.position[0];
+            iposition[1] = changed.position[1];
+            Queen s = new Queen(iposition,icolor);
+            for (Checker i : checkers) {
+                if ((i.position[0] == changed.position[0]) && (i.position[1] == changed.position[1])) {
+                    checkers.remove(i);
+                    checkers.add(s);
+                }
+            }
+            return s;
+        }
+        else{
+            return changed;
+        }
+    }
 
     Game() {
         for (int i = 0; i < 12; i++) {
@@ -70,6 +97,8 @@ public class Game {
         Checker a = search(first_position);
         if (onChop) {
             checker_on_chop.chop(field, final_position);
+            delete(checker_on_chop.chopped);
+            checker_on_chop = change(checker_on_chop);
             if (checker_on_chop.check_possible_chop(field)) {
             } else {
                 onChop = false;
@@ -80,6 +109,8 @@ public class Game {
                 if (a.color * turn > 0) {
                     if (!a.move(field, final_position)) {
                         if (a.chop(field, final_position)) {
+                            delete(a.chopped);
+                            a = change(a);
                             if (a.check_possible_chop(field)) {
                                 onChop = true;
                                 checker_on_chop = a;
@@ -88,6 +119,7 @@ public class Game {
                             }
                         }
                     } else {
+                        a = change(a);
                         turn *= -1;
                     }
                 }
