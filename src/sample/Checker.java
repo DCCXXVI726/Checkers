@@ -3,7 +3,7 @@ package sample;
 public class Checker {
     public byte color;
     public byte[] position = new byte[2];
-    public byte[] chopped;
+    public byte[] chopped =  new byte[2];
 
     Checker(byte[] position1, byte color1) {
         color = color1;

@@ -60,6 +60,7 @@ public class Game {
         for (Checker i : checkers) {
             if ((i.position[0] == position[0]) && (i.position[1] == position[1])) {
                 checkers.remove(i);
+                break;
             }
         }
     }
@@ -76,6 +77,7 @@ public class Game {
                     checkers.remove(i);
                     checkers.add(s);
                     field[iposition[0]][iposition[1]] = (byte)(2*icolor/Math.abs(icolor));
+                    break;
                 }
             }
             return s;
