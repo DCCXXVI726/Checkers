@@ -14,10 +14,14 @@ public class Queen extends Checker {
         if (enemies[0] > 1 || enemies[1] != 1) return false;
         else if (field[place_of_chop[0]][place_of_chop[1]] == 0) {
             field[enemies[2]][enemies[3]] = 0;
-            field[place_of_chop[0]][place_of_chop[1]] = color;
+            field[place_of_chop[0]][place_of_chop[1]] = (byte) (color * 2);
             field[position[0]][position[1]] = 0;
+
             position[0] = place_of_chop[0];
             position[1] = place_of_chop[1];
+
+            chopped[0] = enemies[2];
+            chopped[1] = enemies[3];
             return true;
         }
         return false;
@@ -65,7 +69,7 @@ public class Queen extends Checker {
 
         if (enemies[0] > 0) return false;
         else if (field[place_of_move[0]][place_of_move[1]] == 0) {
-            field[place_of_move[0]][place_of_move[1]] = color;
+            field[place_of_move[0]][place_of_move[1]] = (byte) (color * 2);
             field[position[0]][position[1]] = 0;
             position[0] = place_of_move[0];
             position[1] = place_of_move[1];
