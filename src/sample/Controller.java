@@ -15,6 +15,7 @@ public class Controller {
     public Button startButton;
     public Label initialCoords;
     public Label finalCoords;
+    public Label currentMove;
     private int sideWidth;
     private int diameter;
     private byte initialX;
@@ -36,6 +37,8 @@ public class Controller {
         byte finalPos[] = {finalY, finalX};
         game.handler(startPos, finalPos);
         printField(game.field);
+        if (game.turn == 1) currentMove.setText("White turn");
+        else currentMove.setText("Black turn");
     }
 
     public void printStar(double centerx, double centery, double height, GraphicsContext gc) {

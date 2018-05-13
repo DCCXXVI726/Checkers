@@ -30,6 +30,7 @@ public class Queen extends Checker {
 
     public boolean check_chop(byte[][] field, byte[] place_of_chop) {
         if (Math.abs(place_of_chop[0] - position[0]) != Math.abs(place_of_chop[1] - position[1])) return false;
+        if (place_of_chop[0] - position[0] == 0) return false;
 
         byte[] enemies = countEnemies(field, place_of_chop);
 
