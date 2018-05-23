@@ -6,33 +6,7 @@ import java.util.List;
 public class Game {
     byte white = 1;
     byte black = -1;
-    byte[][] start_positions = {
-            {7, 0},
-            {7, 2},
-            {7, 4},
-            {7, 6},
-            {6, 1},
-            {6, 3},
-            {6, 5},
-            {6, 7},
-            {5, 0},
-            {5, 2},
-            {5, 4},
-            {5, 6},
-            {2, 1},
-            {2, 3},
-            {2, 5},
-            {2, 7},
-            {1, 0},
-            {1, 2},
-            {1, 4},
-            {1, 6},
-            {0, 1},
-            {0, 3},
-            {0, 5},
-            {0, 7},
 
-    };
     List<Checker> checkers = new ArrayList<Checker>();
     public byte[][] field = {
             {0, -1, 0, -1, 0, -1, 0, -1},
@@ -88,11 +62,20 @@ public class Game {
     }
 
     Game() {
-        for (int i = 0; i < 12; i++) {
-            checkers.add(new Checker(start_positions[i], white));
-        }
-        for (int i = 12; i < 24; i++) {
-            checkers.add(new Checker(start_positions[i], black));
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                byte color = field[i][k];
+                switch (color) {
+                    case 1:
+                    case -1:
+                        checkers.add(new Checker(new byte[]{(byte)i, (byte)k}, color));
+                        break;
+                    case 2:
+                    case -2:
+                        checkers.add(new Queen(new byte[]{(byte)i, (byte)k}, color));
+                        break;
+                }
+            }
         }
     }
 
@@ -122,7 +105,7 @@ public class Game {
                             }
                         }
                     } else {
-                        a = change(a,field);
+                        change(a,field);
                         turn *= -1;
                     }
                 }

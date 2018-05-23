@@ -49,7 +49,7 @@ public class Checker {
                 {(byte) (position[0] - 2), (byte) (position[1] - 2)}
         };
         for (byte[] i : possible_place_of_chop) {
-            if ((i[0] > 0 && i[0] < 8) && (i[1] > 0 && i[1] < 8) && (check_chop(field, i))) {
+            if ((i[0] >= 0 && i[0] < 8) && (i[1] >= 0 && i[1] < 8) && (check_chop(field, i))) {
                 possible = true;
             }
             ;
