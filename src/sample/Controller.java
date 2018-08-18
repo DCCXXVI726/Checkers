@@ -1,10 +1,13 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -16,6 +19,10 @@ public class Controller {
     public Label initialCoords;
     public Label finalCoords;
     public Label currentMove;
+    public TextArea gameConsole;
+    public ComboBox<String> regimeComboBox;
+    public TextArea ipServerTextArea;
+
     private int sideWidth;
     private int diameter;
     private byte initialX;
@@ -23,25 +30,47 @@ public class Controller {
     private byte finalX;
     private byte finalY;
 
+    @FXML
+    public void initialize() {
+        regimeComboBox.getItems().addAll("SinglePlayer", "MultiPlayer");
+        printToConsole("Choose the regime");
+        startButton.setDisable(true);
+        gameConsole.setEditable(false);
+        ipServerTextArea.setDisable(true);
+    }
+
+    public void regimeChoosed(ActionEvent event) {
+        startButton.setDisable(false);
+        if (regimeComboBox.getValue().equals("MultiPlayer"))
+            ipServerTextArea.setDisable(false);
+        else
+            ipServerTextArea.setDisable(true);
+    }
+
     public void mouseClicked(MouseEvent event) {
         initialX = (byte) (event.getX() / sideWidth);
         initialY = (byte) (event.getY() / sideWidth);
-        initialCoords.setText(Double.toString(initialY) + ": " + Double.toString(initialX));
     }
 
     public void mouseReleased(MouseEvent event) {
         finalX = (byte) (event.getX() / sideWidth);
         finalY = (byte) (event.getY() / sideWidth);
-        finalCoords.setText(Double.toString(finalY) + ": " + Double.toString(finalX));
-        byte startPos[] = {initialY, initialX};
-        byte finalPos[] = {finalY, finalX};
-        game.handler(startPos, finalPos);
-        printField(game.field);
-        if (game.turn == 1) currentMove.setText("White turn");
-        else currentMove.setText("Black turn");
     }
 
-    public void printStar(double centerx, double centery, double height, GraphicsContext gc) {
+    private void processTheMovement() {
+        byte startPos[] = {initialY, initialX};
+        byte finalPos[] = {finalY, finalX};
+        if (regimeComboBox.getValue().equals("SinglePlayer")) {
+            game.handler(startPos, finalPos);
+            printField(game.field);
+            if (game.turn == 1) currentMove.setText("White turn");
+            else currentMove.setText("Black turn");
+        } else {
+
+        }
+    }
+
+    private void printStar(double centerx, double centery, double height, GraphicsContext gc) {
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(2);
         double x[] = {centerx - 0.2974 * height,
@@ -61,7 +90,11 @@ public class Controller {
         gc.strokePolygon(x, y, x.length);
     }
 
-    public void printField(byte[][] field) {
+    private void printToConsole(String str) {
+        gameConsole.appendText(str + "\n");
+    }
+
+    private void printField(byte[][] field) {
         GraphicsContext gc = graphicField.getGraphicsContext2D();
         sideWidth = (int) gc.getCanvas().getHeight() / 8;
         diameter = (int) (sideWidth * 0.9);
@@ -88,7 +121,15 @@ public class Controller {
     }
 
     public void start(MouseEvent event) {
-        game = new Game();
-        printField(game.field);
+        printToConsole("The game has started");
+        startButton.setDisable(true);
+        ipServerTextArea.setDisable(true);
+        regimeComboBox.setDisable(true);
+        if (regimeComboBox.getValue().equals("SinglePlayer")) {
+            game = new Game();
+            printField(game.field);
+        } else {
+
+        }
     }
 }
