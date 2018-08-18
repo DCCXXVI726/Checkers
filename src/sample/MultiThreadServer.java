@@ -13,12 +13,15 @@ public class MultiThreadServer {
 
 
     ExecutorService executeIt = Executors.newFixedThreadPool(2);
+    MonoThreadClientHandler clientBlack;
+    MonoThreadClientHandler clientWhite;
     int color = 1;
     Game mainGame = new Game();
 
-    public byte[][] handler(byte[] first_position, byte[] final_position){
+    public void handler(byte[] first_position, byte[] final_position){
         mainGame.handler(first_position,final_position);
-        
+        clientWhite.send(mainGame.field);
+        clientBlack.send(mainGame.field);
     }
     public void start() {
         try (ServerSocket server = new ServerSocket(3345); BufferedReader br = new BufferedReader(new InputStreamReader(System.in)))
@@ -54,8 +57,15 @@ public class MultiThreadServer {
                 // в Runnable(при необходимости можно создать Callable)
                 // монопоточную нить = сервер - MonoThreadClientHandler и тот
                 // продолжает общение от лица сервера
-                executeIt.execute(new MonoThreadClientHandler(client, this,color));
-                color-=2;
+                if (color==1){
+                    clientWhite = new MonoThreadClientHandler(client,this,color);
+                    executeIt.execute(clientWhite);
+                    color*=-1;
+                } else {
+                    clientBlack = new MonoThreadClientHandler(client,this,color);
+                    executeIt.execute(clientBlack);
+                }
+
                 System.out.print("Connection accepted.");
             }
 

@@ -5,11 +5,29 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class MonoThreadClientHandler implements Runnable {
-
+    boolean endGame = false;
+    MultiThreadServer server;
+    DataOutputStream out;
+    DataInputStream in;
     private static Socket clientDialog;
+    public void send(byte[][] field){
+        StringBuffer s = new StringBuffer();
+        for (int i = 0;i<8;i++){
+            for(int j = 0;j<8;j++){
+                s.append(field[i][j]);
+            }
+        }
+        try{
+        out.writeUTF(s.toString());}
+        catch (IOException e){
+
+        }
+
+    };
 
     public MonoThreadClientHandler(Socket client,MultiThreadServer server,int color) {
         MonoThreadClientHandler.clientDialog = client;
+        this.server = server;
     }
 
     @Override
@@ -19,10 +37,10 @@ public class MonoThreadClientHandler implements Runnable {
             // инициируем каналы общения в сокете, для сервера
 
             // канал записи в сокет следует инициализировать сначала канал чтения для избежания блокировки выполнения программы на ожидании заголовка в сокете
-            DataOutputStream out = new DataOutputStream(clientDialog.getOutputStream());
+            out = new DataOutputStream(clientDialog.getOutputStream());
 
 // канал чтения из сокета
-            DataInputStream in = new DataInputStream(clientDialog.getInputStream());
+            in = new DataInputStream(clientDialog.getInputStream());
             System.out.println("DataInputStream created");
 
             System.out.println("DataOutputStream  created");
@@ -38,13 +56,13 @@ public class MonoThreadClientHandler implements Runnable {
                 // серверная нить ждёт в канале чтения (inputstream) получения
                 // данных клиента после получения данных считывает их
                 String entry = in.readUTF();
-
-                // и выводит в консоль
-                System.out.println("READ from clientDialog message - " + entry);
-
+                String[] e = entry.split(" ");
+                byte[] first_position={Byte.parseByte(e[0]),Byte.parseByte(e[1])};
+                byte[] final_position={Byte.parseByte(e[2]),Byte.parseByte(e[3])};
+                server.handler(first_position,final_position);
                 // инициализация проверки условия продолжения работы с клиентом
                 // по этому сокету по кодовому слову - quit в любом регистре
-                if (true) {
+                if (endGame) {
 
                     // если кодовое слово получено то инициализируется закрытие
                     // серверной нити
@@ -54,17 +72,6 @@ public class MonoThreadClientHandler implements Runnable {
                     break;
                 }
 
-                // если условие окончания работы не верно - продолжаем работу -
-                // отправляем эхо обратно клиенту
-
-                System.out.println("Server try writing to channel");
-                out.writeUTF();
-                System.out.println("Server Wrote message to clientDialog.");
-
-                // освобождаем буфер сетевых сообщений
-                out.flush();
-
-                // возвращаемся в началло для считывания нового сообщения
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
