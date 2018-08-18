@@ -14,13 +14,16 @@ public class MonoThreadClientHandler implements Runnable {
         StringBuffer s = new StringBuffer();
         for (int i = 0;i<8;i++){
             for(int j = 0;j<8;j++){
+                if(i!=0||j!=0){
+                    s.append(" ");
+                }
                 s.append(field[i][j]);
             }
         }
         try{
         out.writeUTF(s.toString());}
         catch (IOException e){
-
+            e.printStackTrace();
         }
 
     };

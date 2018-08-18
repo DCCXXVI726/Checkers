@@ -71,8 +71,7 @@ public class MultiThreadServer {
 
             // закрытие пула нитей после завершения работы всех нитей
             executeIt.shutdown();
-        } catch (
-                IOException e)
+        } catch (IOException e)
 
         {
             e.printStackTrace();
