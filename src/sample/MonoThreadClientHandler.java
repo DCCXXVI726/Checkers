@@ -17,8 +17,8 @@ public class MonoThreadClientHandler implements Runnable {
                 s.append(field[i][j]);
                 s.append(" ");
             }
-            s.append(turn);
         }
+        s.append(turn);
         try{
         out.writeUTF(s.toString());}
         catch (IOException e){
