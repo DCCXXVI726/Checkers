@@ -16,8 +16,6 @@ public class Controller {
     private Game game;
     public Canvas graphicField;
     public Button startButton;
-    public Label initialCoords;
-    public Label finalCoords;
     public Label currentMove;
     public TextArea gameConsole;
     public ComboBox<String> regimeComboBox;
@@ -49,14 +47,18 @@ public class Controller {
     }
 
     public void mouseClicked(MouseEvent event) {
-        initialX = (byte) (event.getX() / sideWidth);
-        initialY = (byte) (event.getY() / sideWidth);
+        if (!startButton.isDisable()) {
+            initialX = (byte) (event.getX() / sideWidth);
+            initialY = (byte) (event.getY() / sideWidth);
+        }
     }
 
     public void mouseReleased(MouseEvent event) {
-        finalX = (byte) (event.getX() / sideWidth);
-        finalY = (byte) (event.getY() / sideWidth);
-        processTheMovement();
+        if (!startButton.isDisable()) {
+            finalX = (byte) (event.getX() / sideWidth);
+            finalY = (byte) (event.getY() / sideWidth);
+            processTheMovement();
+        }
     }
 
     private void processTheMovement() {
@@ -64,12 +66,10 @@ public class Controller {
         byte finalPos[] = {finalY, finalX};
         if (regimeComboBox.getValue().equals("SinglePlayer")) {
             game.handler(startPos, finalPos);
-            printField(game.field);
-            if(game.endGame()){
+            printField(game.field, game.turn);
+            if (game.endGame()) {
                 endGame();
             }
-            if (game.turn == 1) currentMove.setText("White turn");
-            else currentMove.setText("Black turn");
         } else {
             client.sendPositions(startPos, finalPos);
         }
@@ -99,7 +99,7 @@ public class Controller {
         gameConsole.appendText(str + "\n");
     }
 
-    public void printField(byte[][] field) {
+    public void printField(byte[][] field, int currentMove) {
         GraphicsContext gc = graphicField.getGraphicsContext2D();
         sideWidth = (int) gc.getCanvas().getHeight() / 8;
         diameter = (int) (sideWidth * 0.9);
@@ -122,13 +122,15 @@ public class Controller {
                     printStar(width * sideWidth + sideWidth / 2.0, height * sideWidth + sideWidth / 2.0, sideWidth / 2.0, gc);
             }
         }
-
+        if (currentMove == -1) this.currentMove.setText("Black turn");
+        else if (currentMove == 1) this.currentMove.setText("White turn");
+        else endGame();
     }
 
     public void start(MouseEvent event) {
         if (regimeComboBox.getValue().equals("SinglePlayer")) {
             game = new Game();
-            printField(game.field);
+            printField(game.field, game.turn);
         } else {
             client = new Client(this);
             String[] ipPort = ipServerTextArea.getText().split(":");

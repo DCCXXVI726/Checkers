@@ -43,13 +43,13 @@ public class Client extends Thread {
             String field = streamFromServer.readUTF();
             if (field != null && !field.equals("")) {
                 byte[][] byteField = new byte[8][8];
-                String[] array = field.split(" ");
+                String[] arrayField = field.split(" ");
                 for (int i = 0; i < 8; i++) {
                     for (int k = 0; k < 8; k++) {
-                        byteField[i][k] = Byte.parseByte(array[i * 8 + k]);
+                        byteField[i][k] = Byte.parseByte(arrayField[i * 8 + k]);
                     }
                 }
-                controller.printField(byteField);
+                controller.printField(byteField, Integer.parseInt(arrayField[64]));
                 return 0;
             } else return 1;
         } catch (IOException ex) {
