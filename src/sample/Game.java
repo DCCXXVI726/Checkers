@@ -6,7 +6,15 @@ import java.util.List;
 public class Game {
     byte white = 1;
     byte black = -1;
+    private byte numberOfWhite = 12;
+    private byte numberOfBlack = 12;
 
+    public boolean endGame(){
+        if (numberOfWhite==0||numberOfBlack==0){
+            return true;
+        }
+        return false;
+    }
     List<Checker> checkers = new ArrayList<Checker>();
     public byte[][] field = {
             {0, -1, 0, -1, 0, -1, 0, -1},
@@ -30,6 +38,7 @@ public class Game {
         }
         return null;
     }
+
     private void delete(byte[] position) {
         for (Checker i : checkers) {
             if ((i.position[0] == position[0]) && (i.position[1] == position[1])) {
@@ -39,24 +48,23 @@ public class Game {
         }
     }
 
-    private Checker change(Checker changed,byte[][] field){
-        if (changed.position[0]==3.5-(changed.color)*3.5) {
+    private Checker change(Checker changed, byte[][] field) {
+        if (changed.position[0] == 3.5 - (changed.color) * 3.5) {
             byte icolor = changed.color;
             byte[] iposition = new byte[2];
             iposition[0] = changed.position[0];
             iposition[1] = changed.position[1];
-            Queen s = new Queen(iposition,icolor);
+            Queen s = new Queen(iposition, icolor);
             for (Checker i : checkers) {
                 if ((i.position[0] == changed.position[0]) && (i.position[1] == changed.position[1])) {
                     checkers.remove(i);
                     checkers.add(s);
-                    field[iposition[0]][iposition[1]] = (byte)(2*icolor/Math.abs(icolor));
+                    field[iposition[0]][iposition[1]] = (byte) (2 * icolor / Math.abs(icolor));
                     break;
                 }
             }
             return s;
-        }
-        else{
+        } else {
             return changed;
         }
     }
@@ -68,11 +76,11 @@ public class Game {
                 switch (color) {
                     case 1:
                     case -1:
-                        checkers.add(new Checker(new byte[]{(byte)i, (byte)k}, color));
+                        checkers.add(new Checker(new byte[]{(byte) i, (byte) k}, color));
                         break;
                     case 2:
                     case -2:
-                        checkers.add(new Queen(new byte[]{(byte)i, (byte)k}, color));
+                        checkers.add(new Queen(new byte[]{(byte) i, (byte) k}, color));
                         break;
                 }
             }
@@ -84,7 +92,25 @@ public class Game {
         if (onChop) {
             checker_on_chop.chop(field, final_position);
             delete(checker_on_chop.chopped);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             checker_on_chop = change(checker_on_chop,field);
+            if (a.color==1){
+                numberOfBlack-=1;
+            }
+            if (a.color==-1){
+                numberOfWhite-=1;
+            }
+=======
+            checker_on_chop = change(checker_on_chop, field);
+>>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
+=======
+            checker_on_chop = change(checker_on_chop, field);
+>>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
+=======
+            checker_on_chop = change(checker_on_chop, field);
+>>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
             if (checker_on_chop.check_possible_chop(field)) {
             } else {
                 onChop = false;
@@ -95,8 +121,14 @@ public class Game {
                 if (a.color * turn > 0) {
                     if (!a.move(field, final_position)) {
                         if (a.chop(field, final_position)) {
+                            if (a.color==1){
+                                numberOfBlack-=1;
+                            }
+                            if (a.color==-1){
+                                numberOfWhite-=1;
+                            }
                             delete(a.chopped);
-                            a = change(a,field);
+                            a = change(a, field);
                             if (a.check_possible_chop(field)) {
                                 onChop = true;
                                 checker_on_chop = a;
@@ -105,7 +137,7 @@ public class Game {
                             }
                         }
                     } else {
-                        change(a,field);
+                        change(a, field);
                         turn *= -1;
                     }
                 }

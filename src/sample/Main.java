@@ -17,7 +17,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        if (args[0].equals("Server")) {
+        if (args.length != 0 && args[0].equals("Server")) {
             MultiThreadServer Server = new MultiThreadServer();
             Server.start();
         } else {
