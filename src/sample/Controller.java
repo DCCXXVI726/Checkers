@@ -29,7 +29,6 @@ public class Controller {
     private byte initialY;
     private byte finalX;
     private byte finalY;
-    Client client;
 
     @FXML
     public void initialize() {
@@ -56,7 +55,6 @@ public class Controller {
     public void mouseReleased(MouseEvent event) {
         finalX = (byte) (event.getX() / sideWidth);
         finalY = (byte) (event.getY() / sideWidth);
-        processTheMovement();
     }
 
     private void processTheMovement() {
@@ -65,13 +63,10 @@ public class Controller {
         if (regimeComboBox.getValue().equals("SinglePlayer")) {
             game.handler(startPos, finalPos);
             printField(game.field);
-            if(game.endGame()){
-                //добавить конец игры
-            }
             if (game.turn == 1) currentMove.setText("White turn");
             else currentMove.setText("Black turn");
         } else {
-            client.sendPositions(startPos, finalPos);
+
         }
     }
 
@@ -99,7 +94,7 @@ public class Controller {
         gameConsole.appendText(str + "\n");
     }
 
-    public void printField(byte[][] field) {
+    private void printField(byte[][] field) {
         GraphicsContext gc = graphicField.getGraphicsContext2D();
         sideWidth = (int) gc.getCanvas().getHeight() / 8;
         diameter = (int) (sideWidth * 0.9);
@@ -126,28 +121,15 @@ public class Controller {
     }
 
     public void start(MouseEvent event) {
+        printToConsole("The game has started");
+        startButton.setDisable(true);
+        ipServerTextArea.setDisable(true);
+        regimeComboBox.setDisable(true);
         if (regimeComboBox.getValue().equals("SinglePlayer")) {
             game = new Game();
             printField(game.field);
         } else {
-            client = new Client(this);
-            String[] ipPort = ipServerTextArea.getText().split(":");
-            if (ipPort.length < 2 || client.connect(ipPort[0], Integer.parseInt(ipPort[1])) > 0) {
-                printToConsole("Couldn't connect");
-                return;
-            }
-            client.start();
-        }
-        startButton.setDisable(true);
-        ipServerTextArea.setDisable(true);
-        regimeComboBox.setDisable(true);
-        printToConsole("The game has started");
-    }
 
-    private void endGame() {
-        printToConsole("The game has finished");
-        startButton.setDisable(false);
-        ipServerTextArea.setDisable(false);
-        regimeComboBox.setDisable(false);
+        }
     }
 }

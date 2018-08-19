@@ -10,15 +10,16 @@ public class MonoThreadClientHandler implements Runnable {
     DataOutputStream out;
     DataInputStream in;
     private static Socket clientDialog;
-    public void send(byte[][] field,byte turn){
+    public void send(byte[][] field){
         StringBuffer s = new StringBuffer();
         for (int i = 0;i<8;i++){
             for(int j = 0;j<8;j++){
-                s.append(field[i][j]);
+                if(i!=0||j!=0){
                     s.append(" ");
+                }
+                s.append(field[i][j]);
             }
         }
-        s.append(turn);
         try{
         out.writeUTF(s.toString());}
         catch (IOException e){

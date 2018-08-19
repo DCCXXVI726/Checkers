@@ -20,8 +20,8 @@ public class MultiThreadServer {
 
     public void handler(byte[] first_position, byte[] final_position){
         mainGame.handler(first_position,final_position);
-        clientWhite.send(mainGame.field,mainGame.turn);
-        clientBlack.send(mainGame.field,mainGame.turn);
+        clientWhite.send(mainGame.field);
+        clientBlack.send(mainGame.field);
     }
     public void start() {
         try (ServerSocket server = new ServerSocket(3345); BufferedReader br = new BufferedReader(new InputStreamReader(System.in)))
