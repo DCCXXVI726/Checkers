@@ -6,7 +6,15 @@ import java.util.List;
 public class Game {
     byte white = 1;
     byte black = -1;
+    private byte numberOfWhite = 12;
+    private byte numberOfBlack = 12;
 
+    public boolean endGame(){
+        if (numberOfWhite==0||numberOfBlack==0){
+            return true;
+        }
+        return false;
+    }
     List<Checker> checkers = new ArrayList<Checker>();
     public byte[][] field = {
             {0, -1, 0, -1, 0, -1, 0, -1},
@@ -84,6 +92,12 @@ public class Game {
         if (onChop) {
             checker_on_chop.chop(field, final_position);
             delete(checker_on_chop.chopped);
+            if (a.color==1){
+                numberOfBlack-=1;
+            }
+            if (a.color==-1){
+                numberOfWhite-=1;
+            }
             checker_on_chop = change(checker_on_chop, field);
             if (checker_on_chop.check_possible_chop(field)) {
             } else {
@@ -96,6 +110,12 @@ public class Game {
                     if (!a.move(field, final_position)) {
                         if (a.chop(field, final_position)) {
                             delete(a.chopped);
+                            if (a.color==1){
+                                numberOfBlack-=1;
+                            }
+                            if (a.color==-1){
+                                numberOfWhite-=1;
+                            }
                             a = change(a, field);
                             if (a.check_possible_chop(field)) {
                                 onChop = true;

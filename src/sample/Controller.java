@@ -65,6 +65,9 @@ public class Controller {
         if (regimeComboBox.getValue().equals("SinglePlayer")) {
             game.handler(startPos, finalPos);
             printField(game.field);
+            if(game.endGame()){
+                //добавить конец игры
+            }
             if (game.turn == 1) currentMove.setText("White turn");
             else currentMove.setText("Black turn");
         } else {
