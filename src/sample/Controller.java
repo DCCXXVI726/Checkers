@@ -47,14 +47,14 @@ public class Controller {
     }
 
     public void mouseClicked(MouseEvent event) {
-        if (!startButton.isDisable()) {
+        if (startButton.isDisable()) {
             initialX = (byte) (event.getX() / sideWidth);
             initialY = (byte) (event.getY() / sideWidth);
         }
     }
 
     public void mouseReleased(MouseEvent event) {
-        if (!startButton.isDisable()) {
+        if (startButton.isDisable()) {
             finalX = (byte) (event.getX() / sideWidth);
             finalY = (byte) (event.getY() / sideWidth);
             processTheMovement();
