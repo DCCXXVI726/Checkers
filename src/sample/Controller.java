@@ -66,7 +66,7 @@ public class Controller {
             game.handler(startPos, finalPos);
             printField(game.field);
             if(game.endGame()){
-                //добавить конец игры
+                endGame();
             }
             if (game.turn == 1) currentMove.setText("White turn");
             else currentMove.setText("Black turn");

@@ -92,9 +92,7 @@ public class Game {
         if (onChop) {
             checker_on_chop.chop(field, final_position);
             delete(checker_on_chop.chopped);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             checker_on_chop = change(checker_on_chop,field);
             if (a.color==1){
                 numberOfBlack-=1;
@@ -102,15 +100,12 @@ public class Game {
             if (a.color==-1){
                 numberOfWhite-=1;
             }
-=======
+
             checker_on_chop = change(checker_on_chop, field);
->>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
-=======
+
             checker_on_chop = change(checker_on_chop, field);
->>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
-=======
             checker_on_chop = change(checker_on_chop, field);
->>>>>>> eecb65cf5b389743177549608d72ee7cf8682b55
+
             if (checker_on_chop.check_possible_chop(field)) {
             } else {
                 onChop = false;
